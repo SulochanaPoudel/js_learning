@@ -1,0 +1,18 @@
+/* for navigation styles */
+
+  .nav-bg {
+    background-color: #18181b;
+  }
+  
+  .nav-link {
+    color: white !important;
+  }
+  
+  .nav-link:hover {
+   border-bottom: 2px solid white;
+   
+  }
+
+  .text-size{
+    font-size: 22px;
+  }

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <!-- JavaScript -->
+        <script>
+           function answer1(){
+            document.getElementById('q.6').innerHTML= "Ans4: JavaScript for now."
+           }
+
+        </script>
+
+        <!-- style.css -->
+        <style>
+    .container{
+        margin: 0px 80px;
+    }
+   </style>
+    </head>
+
+    <body style="background-color: #efcbda;">
+        <h1 style="text-align: center;">Its my first Trial of JavaScript</h1>
+
+        <div class="container">
+
+            <h2>This is Something caller after clicking button</h2>
+            <br>
+            <br>
+            <br>
+
+
+            <p id="q.1"> 1. What's you doing?</p>
+            <button type="button"
+                onclick='document.getElementById("q.1").innerHTML = "Ans1: Nothing  more just strated coding"'>Get
+                Answer
+            </button>
+            <br>
+            <br>
+
+
+            <p id="q.2" style="font-size: 5px;">2.Hey, How're you learinig it?</p>
+            <button type="button" onclick="document.getElementById('q.2').style.fontSize='20px'">See Question</button>
+            <br>
+            <br>
+
+
+            <p id="q.3">Ans2: From W3 School.</p>
+            <button type="button" onclick="document.getElementById('q.3').style.display='none'">Hide Answer</button>
+            <br>
+            <br>
+
+
+            <P>3.What about yesterday error?</P>
+            <p id="q.4" style="display:none;">Ans3: Done, it was a typo.</p>
+            <button type="button" onclick="document.getElementById('q.4').style.display='block'">See answer</button>
+            <br>
+            <br>
+
+        </div>
+
+
+
+        <!-- JavaScript in body -->
+        <div class="container">
+             
+             <p id="q.5"></p>
+             <script>
+                 document.getElementById('q.5').innerHTML="4. Which language?";
+             </script>
+             <br>
+             <br>
+
+             <p id="q.6">Wanna See Answer? click button.</p>
+             <button type="button" onclick="answer1()">Button</button>
+             <br>
+             <br>
+
+             <h2>The window.print() Method</h2>
+             <p>Click the button to print the current page.</p>
+             <button onclick="window.print()">Print this page</button>
+             <br>
+             <br>
+
+
+             <p>Now, here we talk about <b>JavaScript Statement</b> which i don't know even a bit.</p>
+             <p id="q.7"></p>
+             <script>
+                let a,b,c;
+                a = 5;
+                b= 6;
+                c = a+b;
+
+                document.getElementById('q.7').innerHTML= c;
+
+                // document.getElementById('q.7').innerHTML="The value of c is" + c +".";
+             </script>
+
+             <img src="js1.png">
+
+  
+
+
+
+
+             
+
+
+
+
+
+
+
+
+        </div>
+           
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       
+
+    </body>
+</html>
