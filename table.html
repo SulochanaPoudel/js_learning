@@ -1,81 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Table list</title>
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-            crossorigin="anonymous">
-        <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <style>
-            .row-size{
-                height: 5px;
-            }
-        </style>
-    </head>
-    <body class="bg-info-subtle">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table list</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        .row-size {
+            height: 5px;
+        }
+    </style>
+</head>
+<body class="bg-info-subtle">
 
-        <div class="container">
+<div class="container">
 
-            <form action class="my-5">
+    <form class="my-5">
 
-                <h1 class="text-center my-5">Registration Form</h1>
-                <div class="form m-5 text-center">
-                    <input class="text-center" id="name" type="text"
-                        placeholder="Name">
-                    <input class="text-center" id="contact" type="number"
-                        placeholder="Phone">
-                    <input class="text-center" id="email" type="email"
-                        placeholder="E-mail">
+        <h1 class="text-center my-5">Registration Form</h1>
+        <div class="form m-5 text-center">
+            <input class="text-center" id="name" type="text" placeholder="Name">
+            <input class="text-center" id="contact" type="number" placeholder="Phone">
+            <input class="text-center" id="email" type="email" placeholder="E-mail">
 
-                    <br><br>
+            <br><br>
 
-                    <button class="bg-dark-subtle px-3 text-dark" id="submit"
-                        type="button">Submit</button>
-
-                </div>
-
-            </form>
-
-            <div class="m-5">
-                <table id="display"
-                    class="table table-primary table-striped table-bordered border-dark">
-                    <thead>
-                        <tr class="text-center">
-                            <th>Name</th>
-                            <th>Phone</th>
-                            <th>E-mail</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr class="p-3 text-center">
-                            <td>hello</td>
-                            <td>hello</td>
-                            <td>hello</td>
-                        </tr>
-
-                    </tbody>
-                </table>
-            </div>
+            <button class="bg-dark-subtle px-3 text-dark" id="submit" onclick="submitForm()" type="button">Submit</button>
+            <button class="bg-danger px-3 text-light" id="submit" onclick="removeForm()" type="button">Remove</button>
 
         </div>
 
+    </form>
 
-        <!-- javascript[] -->
-        <script
-        var UserList = []
-            var User =  {
-                name: "Dipesh",
-                phone: "9846,
+    <div class="m-5">
+        <table id="display" class="table table-primary table-striped table-bordered border-dark">
+            <thead>
+            <tr class="text-center">
+                <th>Name</th>
+                <th>Phone</th>
+                <th>E-mail</th>
+            </tr>
+            </thead>
+
+            <tbody id="tableBody">
+            <tr class="p-3 text-center">
+               
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<!-- javascript -->
+<script>
+    var registrationData = [];
+
+    function submitForm() {
+        var name = document.getElementById("name").value;
+        var contact = document.getElementById("contact").value;
+        var email = document.getElementById("email").value;
+
+        if (name && contact && email) {
+            var newUserInput = { name: name, contact: contact, email: email };
+            if (registrationData.some(function (data) {
+                return data.name === newUserInput.name &&
+                    data.contact === newUserInput.contact &&
+                    data.email === newUserInput.email;
+            })) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Duplicate entry! Please provide unique information.',
+                });
+            } else {
+                registrationData.push(newUserInput);
+                updateTable();
+                clearInputFields();
             }
-            
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'All fields are required!',
+            });
+        }
+    }
 
-        </script>
+    function updateTable() {
+        var tableBody = document.getElementById("tableBody");
 
-    </body>
+        tableBody.innerHTML = "";
+
+        // Loop through the array and add rows to the table
+        registrationData.forEach(function (data) {
+            var newRow = tableBody.insertRow(tableBody.rows.length);
+
+            for (var key in data) {
+                if (data.hasOwnProperty(key)) {
+                    var cell = newRow.insertCell();
+                    cell.innerHTML = data[key];
+                }
+            }
+        });
+    }
+
+    function clearInputFields() {
+        document.getElementById("name").value = "";
+        document.getElementById("contact").value = "";
+        document.getElementById("email").value = "";
+    }
+
+
+    function removeForm(){
+        var name = document.getElementById("name").value;
+        var contact = document.getElementById("contact").value;
+        var email = document.getElementById("email").value;
+
+
+        if (name && contact && email) {
+           
+            var indexToRemove = registrationData.findIndex(function (data) {
+                return data.name === name && data.contact === contact && data.email === email;
+            });
+
+            if (indexToRemove !== -1) {
+
+                registrationData.splice(indexToRemove, 1);
+
+                updateTable();
+
+                clearInputFields();
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Entry not found! Please provide valid information for removal.',
+                });
+            }
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'All fields are required for removal!',
+            });
+        }
+    }
+</script>
+
+
+    
+
+
+
+
+
+
+
+</script>
+
+</body>
 </html>
