@@ -13,34 +13,36 @@
         }
     </style>
 </head>
-<body class="bg-info-subtle">
+<body class="bg-light">
 
 <div class="container">
 
-    <form class="my-5">
+    <form class="my-5 border border-3 border-dark bg-info-subtle">
 
         <h1 class="text-center my-5">Registration Form</h1>
         <div class="form m-5 text-center">
-            <input class="text-center" id="name" type="text" placeholder="Name">
-            <input class="text-center" id="contact" type="number" placeholder="Phone">
-            <input class="text-center" id="email" type="email" placeholder="E-mail">
+            <div><b class="m-3">Name:</b><input class="text-center m-2" id="name" type="text" placeholder="Name"></div>
+            <div><b class="m-3">Phone:</b><input class="text-center m-2" id="contact" type="number" placeholder="Phone"></div>
+            <div><b class="m-3 ">E-mail:</b> <input class="text-center m-2" id="email" type="email" placeholder="E-mail"></div>
+          
 
-            <br><br>
-
-            <button class="bg-dark-subtle px-3 text-dark" id="submit" onclick="submitForm()" type="button">Submit</button>
-            <button class="bg-danger px-3 text-light" id="remove" onclick="removeForm()" type="button">Remove</button>
+            <br>
+            <button class="bg-dark-subtle px-3 text-dark" id="submit" onclick="submitForm()" type="button">Submit</button>   
+            <br>
+            <br>
 
         </div>
 
     </form>
 
     <div class="m-5">
-        <table id="display" class="table table-primary table-striped table-bordered border-dark">
+        <table id="display" class="table table-primary table-striped table-bordered border-dark" style="margin:auto">
             <thead>
-            <tr class="text-center">
+            <tr class="text-center ">
                 <th>Name</th>
                 <th>Phone</th>
                 <th>E-mail</th>
+                <th>Action</th>
                 
             </tr>
             </thead>
@@ -54,6 +56,9 @@
     </div>
 
 </div>
+
+
+
 
 <!-- javascript -->
 <script>
@@ -69,10 +74,14 @@
             }
             return false
     }
+
+
     function submitForm() {
     const inputName = document.getElementById("name").value;
     const inputContact = document.getElementById("contact").value;
     const inputEmail = document.getElementById("email").value;
+
+
 
     if (inputName && inputContact && inputEmail) {
         var newUserInput = { name: inputName, contact: inputContact, email: inputEmail };
@@ -96,12 +105,15 @@
     }
 }
 
-    function updateTable() {
-        var tableBody = document.getElementById("tableBody");
 
+
+
+
+
+function updateTable() {
+        var tableBody = document.getElementById("tableBody");
         tableBody.innerHTML = "";
 
-       
         registrationData.forEach(function (data) {
             var newRow = tableBody.insertRow(tableBody.rows.length);
 
@@ -111,8 +123,53 @@
                     cell.innerHTML = data[key];
                 }
             }
+
+            var removeButtonCell = newRow.insertCell();
+            var removeButton = document.createElement("button");
+            removeButton.innerHTML = "Remove";
+            removeButton.className = "btn btn-danger pl-5 ";
+        
+            removeButton.onclick = function () {
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "Once deleted, you will not be able to recover this data!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#dc3545",
+                    cancelButtonColor: "#6c757d",
+                    confirmButtonText: "Yes, delete it!",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        removeTableRow(data.name, data.contact, data.email);
+                        Swal.fire("Deleted!", "Your data has been deleted.", "success");
+                    } else {
+                        Swal.fire("Cancelled", "Your data is safe!", "info");
+                    }
+                });
+            };
+
+            removeButtonCell.appendChild(removeButton);    
         });
     }
+
+  
+
+
+
+    function removeTableRow(name, contact, email) {
+    var indexToRemove = registrationData.findIndex(function (data) {
+        return data.name === name && data.contact === contact && data.email === email;
+    });
+
+    if (indexToRemove !== -1) {
+        registrationData.splice(indexToRemove, 1);
+        updateTable();
+    } else {
+        alert("unable");
+    }
+}
+
+
 
     function clearInputFields() {
         document.getElementById("name").value = "";
@@ -121,43 +178,11 @@
     }
 
 
-    function removeForm(){
-        var name = document.getElementById("name").value;
-        var contact = document.getElementById("contact").value;
-        var email = document.getElementById("email").value;
-
-
-        if (name && contact && email) {
-           
-            var indexToRemove = registrationData.findIndex(function (data) {
-                return data.name === name && data.contact === contact && data.email === email;
-            });
-
-            if (indexToRemove !== -1) {
-
-                registrationData.splice(indexToRemove, 1);
-
-                updateTable();
-
-                clearInputFields();
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Entry not found! Please provide valid information for removal.',
-                });
-            }
-        } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'All fields are required for removal!',
-            });
-        }
-    }
-
     
 </script>
+
+
+    
 
 
 
