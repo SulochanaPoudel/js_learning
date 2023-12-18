@@ -166,25 +166,25 @@
     const editedEmail = document.getElementById("email").value;
 
     if (editedName && editedContact && editedEmail) {
-        // Find the index of the data to edit
+      
         const indexToEdit = registrationData.findIndex(function (data) {
             return data.name === dataToEdit.name &&
                    data.contact === dataToEdit.contact &&
                    data.email === dataToEdit.email;
         });
 
-        // Update the data at the found index
+        
         registrationData[indexToEdit] = {
             name: editedName,
             contact: editedContact,
             email: editedEmail,
         };
 
-        // Update the table and reset the form
+        
         updateTable();
         clearInputFields();
 
-        // Change the "Save" button back to "Submit"
+       
         document.getElementById("submit").innerHTML = "Submit";
         document.getElementById("submit").onclick = submitForm;
     } else {
