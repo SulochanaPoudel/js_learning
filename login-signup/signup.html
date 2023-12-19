@@ -72,31 +72,53 @@
 
                     if(passWord == CPassword){
 
-                        if(specialCharacters.test(passWord)  && capitalLetters.test(passWord) &&  num.test(passWord)){
-                                list.push({userName, passWord, CPassword});
-                                Swal.fire({
-                                icon: 'success',
-                                title: 'Account Created!',
-                                text: 'Your account is successfully created.',
-                                }); 
+                        if(specialCharacters.test(passWord)) {
+
+                            if(  capitalLetters.test(passWord)) {
+
+                                if(num.test(passWord)){
+
+
+                                    list.push({userName, passWord, CPassword});
+
+                                    Swal.fire({
+                                    icon: 'success',
+                                    title: 'Account Created!',
+                                    text: 'Your account is successfully created.',
+                                    }); 
             
-                                  // clearance
-                                username.value = "";
-                                password.value= "";
-                                cPassword.value = "";
+                                      // clearance
+                                    username.value = "";
+                                    password.value= "";
+                                    cPassword.value = "";
 
+                                }
+                                else{
+                                     Swal.fire({
+                                    icon: 'error',
+                                    title: 'Sorry!',
+                                    text: 'Number required!',
+                                    });
+
+                                }                               
+                            }
+                            else{
+                                Swal.fire({
+                                icon: 'error',
+                                title: 'Sorry!',
+                                text: 'Capital letter required!',
+                                });
+                            }
                         }
-
                         else{
                             Swal.fire({
                             icon: 'error',
                             title: 'Sorry!',
-                            text: 'specialCharacter and number required!',
+                            text: 'specialCharacter like(@#$%^&*()_+\...) required!',
                             });
-
                         }
                     
-                   }
+                    }
 
                   else{
                     Swal.fire({
@@ -104,10 +126,9 @@
                     title: 'Opps..!',
                     text: 'Password not same!',
                    }); 
+                  }
 
-                
-
-                    }
+                  
                 }
                 else{
                     Swal.fire({
