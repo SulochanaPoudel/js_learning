@@ -59,33 +59,52 @@
             var userName = username.value;
             var passWord = password.value;
             var CPassword = cPassword.value;
+
+           
+            var specialCharacters = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+            var capitalLetterRegex = /[A-Z]/;
           
 
                  if(userName && passWord && CPassword){
 
-                if(passWord.length >= 8){
+                  if(passWord.length >= 8){
 
-                    if(passWord != CPassword){
+                    if(passWord == CPassword){
+
+                        if(specialCharacters.test(passWord)  && capitalLetterRegex.test(passWord)){
+                                list.push({userName, passWord, CPassword});
+                                Swal.fire({
+                                icon: 'success',
+                                title: 'Account Created!',
+                                text: 'Your account is successfully created.',
+                                }); 
+            
+                                  // clearance
+                                username.value = "";
+                                password.value= "";
+                                cPassword.value = "";
+
+                        }
+
+                        else{
+                            Swal.fire({
+                            icon: 'error',
+                            title: 'Sorry!',
+                            text: 'specialCharacter required!',
+                            });
+
+                        }
+                    
+                   }
+
+                  else{
                     Swal.fire({
                     icon: 'error',
                     title: 'Opps..!',
                     text: 'Password not same!',
                    }); 
-                   }
 
-                  else{
-                    list.push({userName, passWord, CPassword});
-                    Swal.fire({
-                    icon: 'success',
-                    title: 'Account Created!',
-                    text: 'Your account is successfully created.',
-                   }); 
-
-                      // clearance
-                    username.value = "";
-                    password.value= "";
-                    cPassword.value = "";
-               
+                
 
                     }
                 }
