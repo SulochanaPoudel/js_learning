@@ -48,21 +48,24 @@
         <script>
 
         let list = [];
-
-        var userName = document.getElementById('username');
-        var passWord = document.getElementById('password');
-        var CPassword = document.getElementById('cPassword');
+        var username = document.getElementById('username')
+            var password = document.getElementById('password')
+            var cPassword = document.getElementById('cPassword')
+        
+        
 
         function signup(){
-            var username = userName.value;
-            var  password = passWord.value;
-            var cPassword = CPassword.value;    
 
-                 if(username && password && cPassword){
+            var userName = username.value;
+            var passWord = password.value;
+            var CPassword = cPassword.value;
+          
 
-                if(password.length >= 8){
+                 if(userName && passWord && CPassword){
 
-                    if(password != cPassword){
+                if(passWord.length >= 8){
+
+                    if(passWord != CPassword){
                     Swal.fire({
                     icon: 'error',
                     title: 'Opps..!',
@@ -71,14 +74,18 @@
                    }
 
                   else{
-                    list.push({username, password, cPassword});
+                    list.push({userName, passWord, CPassword});
                     Swal.fire({
                     icon: 'success',
                     title: 'Account Created!',
                     text: 'Your account is successfully created.',
                    }); 
 
-                console.log(username, password, cPassword )
+                      // clearance
+                    username.value = "";
+                    password.value= "";
+                    cPassword.value = "";
+               
 
                     }
                 }
@@ -100,11 +107,7 @@
                 });
             }
 
-            // clearance
-            userName = "";
-            password = "";
-            cPassword = "";
-               
+         
         }
 
 
