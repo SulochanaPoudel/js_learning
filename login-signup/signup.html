@@ -62,7 +62,8 @@
 
            
             var specialCharacters = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
-            var capitalLetterRegex = /[A-Z]/;
+            var capitalLetters = /[A-Z]/;
+            var num = /[0-9]/;
           
 
                  if(userName && passWord && CPassword){
@@ -71,7 +72,7 @@
 
                     if(passWord == CPassword){
 
-                        if(specialCharacters.test(passWord)  && capitalLetterRegex.test(passWord)){
+                        if(specialCharacters.test(passWord)  && capitalLetters.test(passWord) &&  num.test(passWord)){
                                 list.push({userName, passWord, CPassword});
                                 Swal.fire({
                                 icon: 'success',
@@ -90,7 +91,7 @@
                             Swal.fire({
                             icon: 'error',
                             title: 'Sorry!',
-                            text: 'specialCharacter required!',
+                            text: 'specialCharacter and number required!',
                             });
 
                         }
