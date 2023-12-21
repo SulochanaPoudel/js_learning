@@ -4,21 +4,136 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz</title>
-    <style>
-   
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
-<body>
+<body class="container mt-5 ">
 
+    <div class="container bg-success-subtle p-5">
+        <h3 class="mb-5 text-center">How well do you know Sulo?</h3>
 
+        <div id="quiz" class="mb-4"></div>
+    <button id="submit" class="btn btn-dark" style=" width: 20%;">Submit Quiz</button>
+    <div id="results" class="mt-4"></div>
 
-    <div id="quiz"></div>
-    <button id="submit">Submit Quiz</button>
-    <div id="results"></div>
+    </div>
+
     
 
-   
+    <script>
+       
+            
+            let output = '';
 
-    
+            
+            const myQuestions = [
+                {
+                    question: "1. What is my full name?",
+                    answers: {
+                        a: "Sulochana Poudel",
+                        b: "Sulo Poudel",
+                        c: "Sulochana Pandey"
+                    },
+                    correctAnswer: "a"
+                },
+                {
+                    question: "2. In which city was Sulo born?",
+                    answers: {
+                        a: "Chitwan",
+                        b: "Kathmandu",
+                        c: "Pokhara"
+                    },
+                    correctAnswer: "c"
+                },
+                {
+                    question: "3. Which is Sulo's preferred way to relax?",
+                    answers: {
+                        a: "Watching TV shows or movies",
+                        b: "Sleeping",
+                        c: "Listening to music"
+                    },
+                    correctAnswer: "b"
+                },
+                {
+                    question: "4. What is Sulo's dream travel destination?",
+                    answers: {
+                        a: "Paris, France",
+                        b: "Tokyo, Japan",
+                        c: " New York City, USA"
+                    },
+                    correctAnswer: "c"
+                },
+                {
+                    question: "5. Which semester am I currently studying in?",
+                    answers: {
+                        a: "2nd semester",
+                        b: "3rd semester",
+                        c: "4th semester"
+                    },
+                    correctAnswer: "b"
+                }
+            ];
+
+        
+            myQuestions.forEach((currentQuestion, questionNumber) => {
+                
+                const answers = [];
+
+                
+                for (letter in currentQuestion.answers) {
+                    answers.push(`
+                        <label class="btn btn-outline-info text-dark mb-5">
+                            <input type="radio" name="question${questionNumber}" value="${letter}" autocomplete="off">
+                            ${letter} : ${currentQuestion.answers[letter]}
+                        </label>
+                    `);
+                }
+
+                
+                output += `
+                    <div class="question mb-3"> ${currentQuestion.question} </div>
+                    <div class="  answers" data-toggle="buttons">
+                        ${answers.join('')}
+                    </div>
+                `; 
+            });
+
+            
+            document.getElementById('quiz').innerHTML = output;
+
+            
+            document.getElementById('submit').addEventListener('click', showResults);
+
+            function showResults() {
+                
+                const answerContainers = document.querySelectorAll('.answers');
+
+              
+                let numCorrect = 0;
+
+             
+                myQuestions.forEach((currentQuestion, questionNumber) => {
+                    
+                    const selector = `input[name=question${questionNumber}]:checked`;
+                    const userAnswer = (document.querySelector(selector) || {}).value;
+
+                 
+                    if (userAnswer === currentQuestion.correctAnswer) {
+                      
+                        numCorrect++;
+
+                    } else {
+                        return;
+                    }
+                });
+
+            //    to show answer
+                document.getElementById('results').innerHTML = `${numCorrect} out of ${myQuestions.length}`;
+            }
+     
+    </script>
+
+  
+
 </body>
 </html>
