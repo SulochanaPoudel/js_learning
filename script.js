@@ -88,7 +88,7 @@ function ShowQuestion(){
     currentQuestion.answers.forEach(answer => {
         const button = document.createElement("button");
         button.innerHTML = answer.text;
-        button.classList.add("btn");
+        button.classList.add("btn-1");
         answerButtons.appendChild(button);
         if(answer.correct){
             button.dataset.correct = answer.correct;
@@ -141,5 +141,15 @@ function handleNextButton(){
         showScore();
     }
 }
+
+nextButton.addEventListener("click", ()=>{
+    if (currentQuestionIndex < questions.length){
+        handleNextButton();
+    }
+    else{
+        startQuiz();
+
+    }
+});
 
 startQuiz();
