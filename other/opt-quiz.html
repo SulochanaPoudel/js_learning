@@ -12,10 +12,25 @@
         }
         .correct    {
             background-color: green;
+            color: aliceblue;
         }
         .incorrect{
             background-color: red;
+            color: aliceblue;
         }
+        .btn-1{
+            width: 100%;
+            margin: 10px 0;
+            display: inline-block;
+        }
+        .btn-1:hover:not([disabled]){
+            background-color: #001e4d;
+            color: aliceblue;
+        }
+        .btn-1:disabled{
+            cursor: no-drop;
+        }
+      
       
     </style>
 </head>
@@ -27,10 +42,10 @@
         <div class="quiz ">
             <h5 class="mb-5" id="question"> Question goes here: </h5>
             <div id="answer-buttons">
-                <button class="btn btn-1 btn-outline-dark form-control mb-3">A</button>
-                <button class="btn btn-1 btn-outline-dark form-control mb-3">B</button>
-                <button class="btn btn-1 btn-outline-dark form-control mb-3">C</button>
-                <button class="btn btn-1 btn-outline-dark form-control mb-5">D</button>
+                <button class="btn-1">A</button>
+                <button class="btn-1" >B</button>
+                <button class="btn-1">C</button>
+                <button class="btn-1">D</button>
             </div>
             <button id="next-btn" class="btn btn-1 btn-outline-secondary text-light bg-color px-3 " style="width: 20%; justify-content: center; margin-left: 80%;"> Next  </button>
         </div>

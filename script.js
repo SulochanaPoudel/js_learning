@@ -46,7 +46,7 @@ const questions = [
     },
     {
         question: "Which is not Sulo's preferred mode of transportation?",
-        answers: [
+        answers: [            
             { text: "Car", correct: false },
             { text: "Bicycle", correct: false },
             { text: "Walking", correct: false },
