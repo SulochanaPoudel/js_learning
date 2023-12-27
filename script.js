@@ -64,9 +64,12 @@ const questions = [
     },
 ];
 
+
 const questionElement = document.getElementById("question");
 const answerButtons = document.getElementById("answer-buttons");
 const nextButton = document.getElementById("next-btn");
+const rangeInput = document.getElementById("range");
+var width = 10;
 
 let currentQuestionIndex = 0;
 let score = 0;
@@ -77,6 +80,10 @@ function startQuiz(){
     nextButton.innerHTML = "Next";
     ShowQuestion();
 
+    width = 0;
+    next.style.width = width + "%";
+    next.innerHTML = width + "%";
+
 }
 
 function ShowQuestion(){
@@ -84,6 +91,9 @@ function ShowQuestion(){
     let currentQuestion = questions[currentQuestionIndex];
     let questionNo = currentQuestionIndex + 1;
     questionElement.innerHTML = questionNo + ". " + currentQuestion.question;
+    
+    
+   
 
     currentQuestion.answers.forEach(answer => {
         const button = document.createElement("button");
@@ -95,6 +105,7 @@ function ShowQuestion(){
         }
         button.addEventListener("click", selectAnswer);
     });
+   
 
 }
 
@@ -109,8 +120,9 @@ function selectAnswer(e){
 const selected = e.target;
 const isCorrect = selected.dataset.correct === "true";
 if(isCorrect){
-    selected.classList.add("correct");
+    // selected.classList.add("correct");
     score++;
+    document.getElementById("range-score").value = score 
 }
 else{
     selected.classList.add("incorrect");
@@ -122,24 +134,46 @@ Array.from(answerButtons.children).forEach(button => {
     button.disabled = true;
 });
 nextButton.style.display = "block";
+
 }
 
 function showScore(){
+   
     resetState();
+ 
     questionElement.innerHTML = `You scored ${score} out of ${questions.length}! `;
     nextButton.innerHTML = "Play again";
-    nextButton.style.display = "block";
+    nextButton.style.display = "block"; 
+
+    
+    
 
 }
 
+var next = document.getElementById("myBar");
+const initialValue = Math.floor(0*100/questions.length);
+next.innerHTML = initialValue + "%";
+next.style.width = initialValue + "%";
+
 function handleNextButton(){
+    width += Math.floor(100/questions.length);
+    if (width > 100) {
+        width = 100;
+      }
+
+      next.style.width = width + "%";
+      next.innerHTML = width + "%";
+
     currentQuestionIndex++;
     if (currentQuestionIndex < questions.length){
         ShowQuestion();
+        
+        
     }
     else{
         showScore();
-    }
+    }  
+
 }
 
 nextButton.addEventListener("click", ()=>{
@@ -151,5 +185,7 @@ nextButton.addEventListener("click", ()=>{
 
     }
 });
+
+
 
 startQuiz();

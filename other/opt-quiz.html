@@ -30,6 +30,20 @@
         .btn-1:disabled{
             cursor: no-drop;
         }
+
+        #myProgress {
+          width: 100%;
+          background-color: #ddd;
+        }
+        
+        #myBar {
+          width: 0%;
+          height: 30px;
+          background-color: #04AA6D;
+          text-align: center;
+          line-height: 30px;
+          color: white;
+        }
       
       
     </style>
@@ -37,10 +51,15 @@
 <body class="bg-color">
     
        <div class="box border border-3 p-5 text-bg-light shadow-lg rounded-3" style="max-width: 600px; width: 90%; margin: 100px auto;">
-        <h1>Simple Quiz </h1>
-        <hr class="border border-3 border-dark">
+        <h1 class="mb-5">Simple Quiz </h1>
+        <input type="range" value="0" id="range-score" max="7" style="width: 100%;">
+
+        <div id="myProgress">
+            <div id="myBar">0%</div>
+          </div>
+
         <div class="quiz ">
-            <h5 class="mb-5" id="question"> Question goes here: </h5>
+            <h5 class="my-5" id="question"> Question goes here: </h5>
             <div id="answer-buttons">
                 <button class="btn-1">A</button>
                 <button class="btn-1" >B</button>
