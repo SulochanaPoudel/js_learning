@@ -68,7 +68,7 @@ const questions = [
 const questionElement = document.getElementById("question");
 const answerButtons = document.getElementById("answer-buttons");
 const nextButton = document.getElementById("next-btn");
-const rangeInput = document.getElementById("range");
+const rangeInput = document.getElementById("range-score");
 var width = 10;
 
 let currentQuestionIndex = 0;
@@ -83,6 +83,7 @@ function startQuiz(){
     width = 0;
     next.style.width = width + "%";
     next.innerHTML = width + "%";
+    rangeInput.value = 0
 
 }
 
@@ -92,8 +93,6 @@ function ShowQuestion(){
     let questionNo = currentQuestionIndex + 1;
     questionElement.innerHTML = questionNo + ". " + currentQuestion.question;
     
-    
-   
 
     currentQuestion.answers.forEach(answer => {
         const button = document.createElement("button");
@@ -116,26 +115,54 @@ function resetState(){
     }
 }
 
+
+
+
+
+
 function selectAnswer(e){
 const selected = e.target;
+selected.classList.add("choosed");
 const isCorrect = selected.dataset.correct === "true";
+const showAnswerButton = document.getElementById("s-a");
+
+function showAnswer() {
+    const correctAnswerIndex = questions[currentQuestionIndex].answers.findIndex(answer => answer.correct);
+    const correctAnswerButton = answerButtons.children[correctAnswerIndex]; 
+    correctAnswerButton.classList.add("correct");
+}
+
+showAnswerButton.addEventListener("click", showAnswer);
+
+
 if(isCorrect){
-    // selected.classList.add("correct");
     score++;
     document.getElementById("range-score").value = score 
 }
 else{
-    selected.classList.add("incorrect");
+    // selected.classList.add("incorrect");
+   
 }
+
+
+
 Array.from(answerButtons.children).forEach(button => {
-    if(button.dataset.correct === "true"){
-        button.classList.add("correct");
-    }
+    // if(button.dataset.correct === "true"){
+    //     button.classList.add("correct");
+    // }
     button.disabled = true;
+ 
+
 });
+
 nextButton.style.display = "block";
 
 }
+
+
+
+
+
 
 function showScore(){
    
@@ -151,18 +178,18 @@ function showScore(){
 }
 
 var next = document.getElementById("myBar");
-const initialValue = Math.floor(0*100/questions.length);
+const initialValue = 0;
 next.innerHTML = initialValue + "%";
 next.style.width = initialValue + "%";
 
 function handleNextButton(){
-    width += Math.floor(100/questions.length);
-    if (width > 100) {
+    width += 100/questions.length;
+    if (width > 100) { 
         width = 100;
       }
 
       next.style.width = width + "%";
-      next.innerHTML = width + "%";
+      next.innerHTML = Math.round(width);
 
     currentQuestionIndex++;
     if (currentQuestionIndex < questions.length){
@@ -189,3 +216,4 @@ nextButton.addEventListener("click", ()=>{
 
 
 startQuiz();
+
