@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorts</title>
+    <style>
+        .container{
+            margin: 0 20%;
+            background-color: rgb(227, 146, 146);
+            padding: 5%;
+        }
+        .first,.second{
+            margin-top: 2%;
+            font-size: 20px;
+            padding: 5%;
+            border: 2px;
+        }
+        button{
+            width: 20%;
+            height: auto;
+            padding: 5px 0;
+            background-color: black;
+            color: aliceblue;
+            margin: 2px 4%;
+        }
+        button:hover{
+            background-color: aliceblue;
+            color:black;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <h1><u>Implementing Array Sorts</u></h1>
+
+        <!-- first sort like sort(), reverse(), {return 0.5 - Math.random} -->
+
+       <div class="first">
+        <h5>1.</h5>
+        <p id="1-sort">"Sulo", "Salina", "Anisha", "Amrita", "Binita", "Sujana", "Sakshi", "Obin","Abil","Ranjan"</p>
+
+        <button onclick="fFunction()">Order By</button>
+        <button onclick="sFunction()">Disorder By</button>
+        <button onclick="tFunction()">Random By</button>
+
+       </div> 
+
+
+       
+        <!-- Second sort like sort(function(a,b) {return a-b}), {return 0.5 - Math.random} -->
+       <div class="second">
+        <h5>2.</h5>
+        <p id="2-sort">Numbers</p>
+
+        <button onclick="numF()">Acending orderwise</button>
+        <button onclick="numS()">Decending orderwise</button>
+        <button onclick="numT()">Randomwise</button>
+
+       </div>
+
+
+       <div class="third">
+        <h5>2.</h5>
+        <p id="3-sort">Numbers</p>
+
+        <button onclick="thirdF()">Acending orderwise</button>
+        <button onclick="thirdS()">Decending orderwise</button>
+        <button onclick="thirdT()">Randomwise</button>
+
+       </div>
+
+
+
+
+
+
+
+       
+        
+
+
+
+
+
+
+    </div>
+
+    <script>
+        let first = ["Sulo ", "Salina ", "Anisha ", "Amrita ", "Binita ", "Sujana ", "Sakshi ", "Obin ","Abil ","Ranjan "];
+        let second = [3,6,8,34,56,7,65,4,87,0,45,34,23,12,34,56,45]; 
+        let third = [
+        {
+            name: 'Sulo',
+            salary : 5000
+        },
+        {
+            name: 'Kranti',
+            salary : 25000
+        }  
+    ]
+
+
+        // first div
+
+        function fFunction(){
+         first.sort();
+        document.getElementById("1-sort").innerHTML = first;
+        }
+
+        function sFunction(){
+         first.reverse();
+        document.getElementById("1-sort").innerHTML = first;
+        }
+        
+        function tFunction(){
+         first.sort(function() {return 0.5 - Math.random()});
+        document.getElementById("1-sort").innerHTML = first;
+        }
+
+
+
+        //Second div
+
+        function numF(){
+            second.sort(function(a,b) {return a-b});
+            document.getElementById("2-sort").innerHTML = second;
+        }
+
+        function numS(){
+            second.sort(function(a,b) {return b-a});
+            document.getElementById("2-sort").innerHTML = second;
+        }
+
+        function numT(){
+            second.sort(function() {return 0.5 - Math.random()});
+            document.getElementById("2-sort").innerHTML = second;
+        }
+
+
+        //Third div
+
+     
+        function thirdF(){
+            third.sort((a,b) =>  a.salary - b.salary);   
+            document.getElementById("3-sort").innerHTML = third;
+        }
+
+        function thirdS(){
+            third.sort((a,b) =>  a.salary - b.salary);   
+            document.getElementById("3-sort").innerHTML = third;
+        }
+
+        function thirdT(){
+            third.sort((a,b) =>  a.salary - b.salary);   
+            document.getElementById("3-sort").innerHTML = third;
+        }
+
+        
+
+
+
+
+
+
+
+
+        
+
+
+
+    </script>
+
+
+    
+</body>
+</html>

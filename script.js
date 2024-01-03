@@ -131,6 +131,8 @@ function selectAnswer(e) {
 
     const isCorrect = selected.dataset.correct === "true";
 
+     
+
 
 
 
@@ -145,14 +147,14 @@ function selectAnswer(e) {
 
 
         if (isCorrect) {
-            score++;
-            document.getElementById("range-score").value = score
-        }
-        else {
+            
+            document.getElementById("range-score").value = score;
+              
+        }else {
             selected.classList.add("incorrect");
-    
+            
         }
-        
+            
     }
 
 
@@ -163,6 +165,10 @@ function selectAnswer(e) {
         nextButton.style.display = "block";
     });
 
+    if (isCorrect) {
+        score++;           
+    }
+  
 
 
     // Array.from(answerButtons.children).forEach(button => {
@@ -231,3 +237,13 @@ nextButton.addEventListener("click", () => {
 
 startQuiz();
 
+// console.log("hello world");
+// const profile = {
+//     name : "Sulochana",
+//     age : 20,
+//     grade : 15,
+// };
+
+// console.log(profile["name"]);
+
+// multiple line comment short cut key == shift + alt + A
