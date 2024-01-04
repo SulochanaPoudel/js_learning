@@ -10,11 +10,12 @@
             background-color: rgb(227, 146, 146);
             padding: 5%;
         }
-        .first,.second{
+        .first,.second,.third{
             margin-top: 2%;
             font-size: 20px;
             padding: 5%;
             border: 2px;
+
         }
         button{
             width: 20%;
@@ -64,26 +65,33 @@
 
        <div class="third">
         <h5>2.</h5>
-        <p id="3-sort">Numbers</p>
+        <p id="3-sort">Salary</p>
 
         <button onclick="thirdF()">Acending orderwise</button>
         <button onclick="thirdS()">Decending orderwise</button>
-        <button onclick="thirdT()">Randomwise</button>
 
        </div>
 
 
-
-
-
-
-
-       
+       <div class="list">
+        <ul id="id-list">
+            <h2>Names</h2>
+            <li>Sulochana</li>
+            <li>Ganga</li>
+            <li>Jamuna</li>
+            <li>Deepa</li>
+            <li>Deepak</li>
+            <li>Niharika</li>
+            <li>Nisan</li>
+            <li>Manasha</li>
+            <li>Sujan</li>
+            <li>Nirdesh</li>
+            <li>Darren</li>
+            <li>Dustin</li>
+        </ul>
         
-
-
-
-
+        <button id="btn-list" onclick="btnList()">Acending Order</button>
+       </div>
 
 
     </div>
@@ -99,7 +107,11 @@
         {
             name: 'Kranti',
             salary : 25000
-        }  
+        },
+        {
+            name: 'Binisha',
+            salary: 35000
+        }
     ]
 
 
@@ -145,18 +157,46 @@
      
         function thirdF(){
             third.sort((a,b) =>  a.salary - b.salary);   
-            document.getElementById("3-sort").innerHTML = third;
+            document.getElementById("3-sort").innerHTML =  JSON.stringify(third);
         }
 
         function thirdS(){
-            third.sort((a,b) =>  a.salary - b.salary);   
-            document.getElementById("3-sort").innerHTML = third;
+            third.sort(function (a,b) {return  b.salary - a.salary });   
+            document.getElementById("3-sort").innerHTML = JSON.stringify(third);
         }
 
-        function thirdT(){
-            third.sort((a,b) =>  a.salary - b.salary);   
-            document.getElementById("3-sort").innerHTML = third;
-        }
+
+        //fourth div
+
+        function btnList()   {
+            var list, i, switching, b, shouldSwich ;
+
+            list = document.getElementById("id-list");
+            switching = true;
+
+            while (switching){
+                switching = false;
+                b= list.getElementsByTagName("LI");
+
+                for(i = 0; i < (b.length - 1); i++)
+                {
+                    shouldSwitch = false;
+
+                   if (b[i].innerHTML.toLowerCase() > b[i+1].innerHTML.toLowerCase()) {
+                    shouldSwich = true;
+                    break;
+
+                    }
+                }
+
+                if(shouldSwich){
+                    b[i].parentNode.insertBefore(b[i + 1], b[i]);
+                    switching = true;
+                }
+            }
+        }   
+
+      
 
         
 
