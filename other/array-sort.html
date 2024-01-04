@@ -29,6 +29,20 @@
             background-color: aliceblue;
             color:black;
         }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .table{
+            background-color: bisque;
+        }
+
     </style>
 </head>
 <body>
@@ -63,6 +77,7 @@
        </div>
 
 
+       <!-- 3rd sort like:  third.sort((a,b) =>  a.salary - b.salary);  -->
        <div class="third">
         <h5>2.</h5>
         <p id="3-sort">Salary</p>
@@ -73,6 +88,8 @@
        </div>
 
 
+
+       <!-- 4th sort of list sort -->
        <div class="list">
         <ul id="id-list">
             <h2>Names</h2>
@@ -88,10 +105,102 @@
             <li>Nirdesh</li>
             <li>Darren</li>
             <li>Dustin</li>
+            <li>Asmit</li>
+            <li>Ajay</li>
+            <li>Obin</li>
+            <li>Krisha</li>
+            <li>Justin</li>
         </ul>
         
         <button id="btn-list" onclick="btnList()">Acending Order</button>
        </div>
+
+
+
+       <!-- 5th ..table sort -->
+
+       <div class="5th-sort" style="margin: 20% 5%;">
+        <h1>Employee Details</h1>
+        <table id="table-sort">
+
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Address</th>
+                </tr>
+            
+           
+                <tr>
+                    <td>3</td>
+                    <td>Anusha</td>
+                    <td>21</td>
+                    <td>Birauta</td>
+                </tr>
+    
+                <tr>
+                    <td>1</td>
+                    <td>Kranti</td>
+                    <td>19</td>
+                    <td>Kaukhola</td>
+                </tr>
+    
+                <tr>
+                    <td>4</td>
+                    <td>Dipesh</td>
+                    <td>20</td>
+                    <td>Nayagau</td>
+                </tr>
+    
+                <tr>
+                    <td>2</td>
+                    <td>Binisha</td>
+                    <td>24</td>
+                    <td>Mahendrapul</td>
+                </tr>
+    
+                <tr>
+                    <td>6</td>
+                    <td>Amrit</td>
+                    <td>22</td>
+                    <td>SrijanaChowk</td>
+                </tr>
+    
+                <tr>
+                    <td>5</td>
+                    <td>Shiva</td>
+                    <td>22</td>
+                    <td>Kaukhola</td>
+                </tr>
+    
+                <tr>
+                    <td>7</td>
+                    <td>Sundar</td>
+                    <td>23</td>
+                    <td>NewRoad</td>
+                </tr>
+    
+                <tr>
+                    <td>8</td>
+                    <td>Milan</td>
+                    <td>23</td>
+                    <td>AmarsinghChowk</td>
+                </tr>
+
+        </table>
+
+        <button style="margin:   10%;" onclick="tableSort0()">Sort Table by ID </button>
+        <button style="margin:  10%;" onclick="tableSort1()">Sort Table by Name</button>
+
+       </div>
+       
+
+
+
+
+
+
+       
 
 
     </div>
@@ -152,6 +261,7 @@
         }
 
 
+
         //Third div
 
      
@@ -164,6 +274,7 @@
             third.sort(function (a,b) {return  b.salary - a.salary });   
             document.getElementById("3-sort").innerHTML = JSON.stringify(third);
         }
+
 
 
         //fourth div
@@ -198,16 +309,76 @@
 
       
 
-        
+        // fifth div
+
+        function tableSort0(){
+            var table, rows, switching, i, x, y, shouldSwitch;
+
+            table = document.getElementById("table-sort");
+            switching = true;
+
+            while(switching){
+                switching = false;
+                rows = table.rows;
+
+                for(i = 1; i < (rows.length - 1); i++){
+                    shouldSwitch = false;
+
+                    x = rows[i].getElementsByTagName("TD")[0].innerText; 
+                    y = rows[i + 1].getElementsByTagName("TD")[0].innerText;
+
+                    if (x.toLowerCase() > y.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+
+
+                if (shouldSwitch){
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                }
+
+            }  
+
+        }
+
+        function tableSort1(){
+            var table, rows, switching, i, x, y, shouldSwitch;
+
+            table = document.getElementById("table-sort");
+            switching = true;
+
+            while(switching){
+                switching = false;
+                rows = table.rows;
+
+                for(i = 1; i < (rows.length - 1); i++){
+                    shouldSwitch = false;
+
+                    x = rows[i].getElementsByTagName("TD")[1].innerText; 
+                    y = rows[i + 1].getElementsByTagName("TD")[1].innerText;
+
+                    if (x.toLowerCase() > y.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+
+
+                if (shouldSwitch){
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                }
+
+            }  
+
+        }
 
 
 
 
 
-
-
-
-        
 
 
 
